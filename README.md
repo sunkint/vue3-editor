@@ -1,24 +1,7 @@
-# vue3-editor
+# Vue3Editor
 
-## Project setup
-```
-yarn install
-```
+> An easy-to-use but yet powerful and customizable rich text editor powered by Quill.js and Vue.js
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+> This project is built on `vue2-editor`, please see its doc.
 
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+[vue2-editor](https://github.com/davidroyer/vue2-editor)
