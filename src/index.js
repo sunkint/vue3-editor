@@ -1,7 +1,7 @@
 import Quill from "quill";
 import VueEditor from "./components/VueEditor.vue";
 
-const version = "__VERSION__";
+const version = "0.1.0-alpha.1";
 
 // Declare install function executed by Vue.use()
 export function install(app) {

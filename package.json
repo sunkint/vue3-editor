@@ -1,12 +1,18 @@
 {
   "name": "vue3-editor",
-  "version": "0.1.0",
+  "version": "0.1.0-alpha.1",
   "description": "HTML editor using Vue.js 3, and Quill.js, an open source editor",
+  "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --target lib",
     "lint": "vue-cli-service lint"
   },
+  "main": "dist/vue3-editor.common.js",
+  "unpkg": "dist/vue3-editor.umd.min.js",
+  "files": [
+    "dist"
+  ],
   "peerDependencies": {
     "vue": "^3.0.0"
   },
