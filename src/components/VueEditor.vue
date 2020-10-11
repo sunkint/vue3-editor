@@ -45,7 +45,7 @@ export default {
       type: String,
       default: '',
     },
-    value: {
+    modelValue: {
       type: String,
       default: '',
     },
@@ -76,7 +76,7 @@ export default {
   }),
 
   watch: {
-    value(val) {
+    modelValue(val) {
       if (val != this.quill.root.innerHTML && !this.quill.hasFocus()) {
         this.quill.root.innerHTML = val;
       }
@@ -168,7 +168,7 @@ export default {
     },
 
     handleInitialContent() {
-      if (this.value) this.quill.root.innerHTML = this.value; // Set initial editor content
+      if (this.modelValue) this.quill.root.innerHTML = this.modelValue; // Set initial editor content
     },
 
     handleSelectionChange(range, oldRange) {
