@@ -9,7 +9,7 @@ export default class CustomLink extends Link {
         if (value.startsWith(this.PROTOCOL_WHITELIST[i])) {
           return value;
         }
-        return `https://${value}`
+        return `https://${value}`;
     }
     return value;
   }
