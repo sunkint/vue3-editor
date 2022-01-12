@@ -20,6 +20,7 @@ import defaultToolbar from '@/helpers/default-toolbar';
 import oldApi from '@/helpers/old-api';
 import mergeDeep from '@/helpers/merge-deep';
 import MarkdownShortcuts from '@/helpers/markdown-shortcuts';
+import CustomLink from '@/helpers/custom-link';
 
 export default {
   name: 'VueEditor',
@@ -69,6 +70,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    prependLinksHttps: {
+      type: Boolean,
+      default: false
+    }
   },
 
   data: () => ({
@@ -126,6 +131,9 @@ export default {
       if (this.useMarkdownShortcuts) {
         Quill.register('modules/markdownShortcuts', MarkdownShortcuts, true);
         modules['markdownShortcuts'] = {};
+      }
+      if (this.prependLinksHttps) {
+        Quill.register('formats/link', CustomLink, true);
       }
       return modules;
     },
