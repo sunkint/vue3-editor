@@ -53,7 +53,7 @@ export default {
       type: Boolean,
     },
     editorToolbar: {
-      type: Array,
+      type: [Array, Object],
       default: () => [],
     },
     editorOptions: {
