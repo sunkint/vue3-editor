@@ -5,6 +5,7 @@
       v-model="content"
       use-custom-image-handler
       use-markdown-shortcuts
+      prepend-links-https
       @focus="onEditorFocus"
       @blur="onEditorBlur"
       @imageAdded="handleImageAdded"
