@@ -15,96 +15,81 @@
   </div>
 </template>
 
-<script>
-// import axiosInstance from "@/helpers/axios";
-import axios from "axios";
-import Quill from "quill";
-const AlignStyle = Quill.import("attributors/style/align");
+<script setup lang="ts">
+import axios from 'axios';
+import { ref } from 'vue';
+import Quill from 'quill';
+import VueEditor from './components/VueEditor.vue';
+
+const AlignStyle = Quill.import('attributors/style/align');
 Quill.register(AlignStyle, true);
 
-const BlockEmbed = Quill.import("blots/block/embed");
+const BlockEmbed = Quill.import('blots/block/embed');
 
-const CLIENT_ID = "993793b1d8d3e2e";
+const CLIENT_ID = '993793b1d8d3e2e';
 
-/**
- * Customize image so we can add an `id` attribute
- */
 class ImageBlot extends BlockEmbed {
-  static create(value) {
+  static create(value: { url: string; id: string }) {
     const node = super.create();
-    node.setAttribute("src", value.url);
-    node.setAttribute("id", value.id);
+    node.setAttribute('src', value.url);
+    node.setAttribute('id', value.id);
     return node;
   }
 
-  static value(node) {
+  static value(node: HTMLImageElement) {
     return {
-      url: node.getAttribute("src"),
-      id: node.getAttribute("id")
+      url: node.getAttribute('src')!,
+      id: node.getAttribute('id')!,
     };
   }
 }
 
-ImageBlot.blotName = "image";
-ImageBlot.tagName = "img";
+ImageBlot.blotName = 'image';
+ImageBlot.tagName = 'img';
 Quill.register(ImageBlot);
 
-export default {
-  data: () => ({
-    content: ""
-  }),
+const content = ref('');
 
-  methods: {
-    handleTextChange(obj) {
-      console.log("TCL: handleTextChange -> obj", obj);
-    },
+// @ts-ignore
+const handleTextChange = (obj: any) => {
+  console.log('TCL: handleTextChange -> obj', obj);
+};
 
-    onEditorBlur(quill) {
-      console.log("editor blur!", quill);
-    },
+const onEditorBlur = (quill: Quill) => {
+  console.log('editor blur!', quill);
+};
 
-    onEditorFocus(quill) {
-      console.log("editor focus!", quill);
-    },
+const onEditorFocus = (quill: Quill) => {
+  console.log('editor focus!', quill);
+};
 
-    async handleImageAdded(file, Editor, cursorLocation) {
-      const formData = new FormData();
-      formData.append("image", file);
+const handleImageAdded = async (file: File, Editor: Quill, cursorLocation: number) => {
+  const formData = new FormData();
+  formData.append('image', file);
 
-      const { data } = await axios({
-        url: "https://api.imgur.com/3/image",
-        method: "POST",
-        headers: { Authorization: "Client-ID " + CLIENT_ID },
-        data: formData
-      });
-      console.log("TCL: handleImageAdded -> data", data);
+  const { data } = await axios({
+    url: 'https://api.imgur.com/3/image',
+    method: 'POST',
+    headers: { Authorization: 'Client-ID ' + CLIENT_ID },
+    data: formData,
+  });
 
-      const { link, id } = data.data;
-      Editor.insertEmbed(
-        cursorLocation,
-        "image",
-        {
-          id,
-          url: link
-        },
-        Quill.sources.USER
-      );
-    },
+  const { link, id } = data.data;
+  Editor.insertEmbed(cursorLocation, 'image', { id, url: link }, Quill.sources.USER);
+};
 
-    handleImageRemoved(image) {
-      console.log("handleImageRemoved -> image", image);
-      this.deleteImage(image.id);
-    }
-  }
+const handleImageRemoved = (image: { id: string }) => {
+  console.log('handleImageRemoved -> image', image);
+  // @ts-ignore
+  deleteImage(image.id);
 };
 </script>
 
 <style lang="scss">
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  // text-align: center;
   color: #2c3e50;
   margin-top: 60px;
 }

@@ -4,8 +4,8 @@
  *
  */
 
-export default function mergeDeep(target, source) {
-  const isObject = obj => obj && typeof obj === "object";
+export default function mergeDeep(target: any, source: any) {
+  const isObject = (obj: any) => obj && typeof obj === 'object';
 
   if (!isObject(target) || !isObject(source)) {
     return source;

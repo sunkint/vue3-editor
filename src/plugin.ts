@@ -10,7 +10,7 @@ console.log("TCL: plugin", plugin);
 console.log("TCL: version", version);
 console.log("TCL: Quill", Quill);
 
-export const install = (app) => {
+export const install = (app: any) => {
   app.use(plugin);
 };
 

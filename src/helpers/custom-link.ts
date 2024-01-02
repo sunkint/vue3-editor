@@ -2,7 +2,7 @@ import Quill from 'quill';
 const Link = Quill.import('formats/link');
 
 export default class CustomLink extends Link {
-  static sanitize(url) {
+  static sanitize(url: string) {
     const value = super.sanitize(url);
     if (value) {
       for (let i = 0; i < this.PROTOCOL_WHITELIST.length; i++)
